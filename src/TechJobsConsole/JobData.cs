@@ -2,6 +2,8 @@
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Collections.Specialized;
+using System;
 
 namespace TechJobsConsole
 {
@@ -48,11 +50,14 @@ namespace TechJobsConsole
             foreach (Dictionary<string, string> row in AllJobs)
             {
                 string aValue = row[column];
+                aValue = aValue.ToLower();   //I'm getting each dictionary pair at a time, and im tolowering what I have in dictionary and what is being searched.
+                value = value.ToLower();
 
                 if (aValue.Contains(value))
                 {
-                    jobs.Add(row);
+                      jobs.Add(row);
                 }
+
             }
 
             return jobs;
@@ -68,7 +73,7 @@ namespace TechJobsConsole
             {
                 return;
             }
-
+             
             List<string[]> rows = new List<string[]>();
 
             using (StreamReader reader = File.OpenText("job_data.csv"))
@@ -112,7 +117,7 @@ namespace TechJobsConsole
             List<string> rowValues = new List<string>();
 
             // Loop through the row string one char at a time
-            foreach (char c in row.ToCharArray())
+            foreach (char c in row.ToCharArray()) // tocharArray converts from string to group of chars
             {
                 if ((c == fieldSeparator && !isBetweenQuotes))
                 {

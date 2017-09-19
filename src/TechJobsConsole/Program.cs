@@ -67,6 +67,7 @@ namespace TechJobsConsole
                     }
                     else
                     {
+
                         searchResults = JobData.FindByColumnAndValue(columnChoice, searchTerm);
                         PrintJobs(searchResults);
                     }
@@ -119,6 +120,19 @@ namespace TechJobsConsole
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
             Console.WriteLine("printJobs is not implemented yet");
+
+            //iterate through dictonary with a nested loop to loop over the 
+            //dictionary key. use dictionary.keys to do this.
+            foreach(Dictionary<string, string> jobs in someJobs)
+            {
+                Console.WriteLine("**********************");
+                foreach(KeyValuePair<string, string> keyValPair in jobs)
+                {
+                    Console.WriteLine(keyValPair.Key + ": " + keyValPair.Value);
+                }
+                Console.WriteLine("**********************");
+            }
+
         }
     }
 }
