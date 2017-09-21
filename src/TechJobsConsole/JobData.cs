@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Text;
 using System.Collections.Specialized;
 using System;
+using System.Linq;
 
 namespace TechJobsConsole
 {
@@ -38,7 +39,39 @@ namespace TechJobsConsole
                 }
             }
             return values;
+           
+
         }
+
+
+        public static List<Dictionary<string, string>> FindByValue(string value)
+        {
+            LoadData();
+                List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> dic in AllJobs)
+            {
+
+                foreach (KeyValuePair<string, string> pair in dic)
+                {
+                    bool found = false;
+
+                 
+                    foreach (string word in pair.Value.Split())
+                    {
+                        if ((word.ToLower() == value.ToLower()) && !found)
+                        {
+                            jobs.Add(dic);
+                            found = true;
+                        }
+                    }
+
+                }
+
+            }
+            return jobs;
+        }
+
 
         public static List<Dictionary<string, string>> FindByColumnAndValue(string column, string value)
         {
